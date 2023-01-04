@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../state";
 import { bindActionCreators } from "redux";
 import axios from "axios";
-import { Image } from "cloudinary-react";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 import { DashProps } from "../props/DashProps";
 import { SearchProps } from "../props/SearchProps";
 import { ChatProps } from "../props/ChatProps";
@@ -175,7 +175,7 @@ export function Dashboard() {
           <button className="search-btn" onClick={() => searchUser(userSearch)}>
             SEARCH
           </button>
-          <Image
+          <image
             className="dashInputImg"
             cloudName="delktfw1a"
             publicId={profilePicture}
