@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../state";
 import { bindActionCreators } from "redux";
 import axios from "axios";
+import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { image } from "@cloudinary/url-gen/qualifiers/source";
 import { DashProps } from "../props/DashProps";
 import { SearchProps } from "../props/SearchProps";
@@ -10,6 +12,14 @@ import { ChatProps } from "../props/ChatProps";
 import { Settings } from "./Settings";
 export function Dashboard() {
   let url = "https://other-side.herokuapp.com";
+
+  // Create and configure your Cloudinary instance.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "demo",
+    },
+    // class: String
+  });
 
   const dispatch = useDispatch();
   const { enterUsername, enterSearchUser, enterChatId, enterMessage } =
@@ -34,6 +44,8 @@ export function Dashboard() {
   const [receiverId, setReceiverId] = useState<number | null>();
   const [receiverImg, setReceiverImg] = useState<string>();
   const [inputSearchUser, setInputSearchUser] = useState<string>("");
+
+  const myImage = cld.image(profilePicture);
 
   const getLoggedInUser = () => {
     axios
@@ -175,7 +187,8 @@ export function Dashboard() {
           <button className="search-btn" onClick={() => searchUser(userSearch)}>
             SEARCH
           </button>
-          <image
+          <AdvancedImage
+            cldImg={myImage}
             className="dashInputImg"
             cloudName="delktfw1a"
             publicId={profilePicture}
