@@ -11,14 +11,13 @@ import { SearchProps } from "../props/SearchProps";
 import { ChatProps } from "../props/ChatProps";
 import { Settings } from "./Settings";
 export function Dashboard() {
-  let url = "https://other-side.herokuapp.com";
+  let url = "http://localhost:3001";
 
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "demo",
+      cloudName: "delktfw1a",
     },
-    // class: String
   });
 
   const dispatch = useDispatch();
@@ -62,7 +61,7 @@ export function Dashboard() {
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   function generateString(length: number) {
     const dashPropsContainer: HTMLElement | null =
-      document.getElementById("props-container");
+      document.getElementById("props-container")!;
     let result = "";
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
@@ -91,8 +90,8 @@ export function Dashboard() {
     });
   };
   const sendMessage = () => {
-    const toEmptyInput: string | HTMLElement | null =
-      document.getElementById("msg-input");
+    const toEmptyInput: any | string | HTMLElement =
+      document.getElementById("msg-input")!;
     const messageData = {
       receiver_id: receiverId,
       username: localStorage.getItem("username"),
@@ -163,7 +162,7 @@ export function Dashboard() {
 
   const openSettings = () => {
     const settingsContainer: HTMLElement | null =
-      document.getElementById("settings");
+      document.getElementById("settings")!;
     settingsContainer.style.animation = "move-left 1s ease";
     settingsContainer.style.animationFillMode = "forwards";
   };
@@ -211,7 +210,7 @@ export function Dashboard() {
             onChange={(e) => enterMessage(e.target.value)}
           />
           <div className="plane-container" onClick={sendMessage}>
-            <i class="fas fa-paper-plane"></i>
+            <i className="fas fa-paper-plane"></i>
           </div>
         </div>
       </div>
